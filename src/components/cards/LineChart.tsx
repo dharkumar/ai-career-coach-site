@@ -61,8 +61,8 @@ export const LineChart: React.FC<LineChartProps> = ({ title, data: rawData = [],
                         </linearGradient>
                     </defs>
                     {/* Grid lines */}
-                    <line x1="0" y1={h / 2} x2={w} y2={h / 2} stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
-                    <line x1="0" y1={h} x2={w} y2={h} stroke="rgba(255,255,255,0.08)" strokeWidth="0.5" />
+                    <line x1="0" y1={h / 2} x2={w} y2={h / 2} stroke={getColor(8)} strokeWidth="0.5" />
+                    <line x1="0" y1={h} x2={w} y2={h} stroke={getColor(8)} strokeWidth="0.5" />
                     {/* Area fill */}
                     <polygon points={areaPoints} fill={`url(#lg_${gradId})`} />
                     {/* Line */}

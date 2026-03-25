@@ -9,7 +9,7 @@ const STATUS_DOT: Record<string, string> = {
     bad: '#ff4040',
     critical: '#ff4040',   // alias — Tele often sends 'critical' instead of 'bad'
     watch: '#f59e0b',
-    neutral: 'rgba(255,255,255,0.25)',
+    neutral: getColor(25),
 };
 
 

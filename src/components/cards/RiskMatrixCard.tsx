@@ -35,9 +35,9 @@ export const RiskMatrixCard: React.FC<RiskMatrixCardProps> = ({ title, risks: ra
                 <div className="flex gap-1 w-full h-full max-h-full">
                     {/* Y-axis labels */}
                     <div className="flex flex-col justify-around items-end pr-0.5 shrink-0">
-                        <span className="font-data text-base uppercase" style={{ color: 'rgba(255,255,255,0.90)' }}>High</span>
-                        <span className="font-data text-base uppercase" style={{ color: 'rgba(255,255,255,0.90)' }}>Med</span>
-                        <span className="font-data text-base uppercase" style={{ color: 'rgba(255,255,255,0.90)' }}>Low</span>
+                        <span className="font-data text-base uppercase" style={{ color: getColor(90) }}>High</span>
+                        <span className="font-data text-base uppercase" style={{ color: getColor(90) }}>Med</span>
+                        <span className="font-data text-base uppercase" style={{ color: getColor(90) }}>Low</span>
                     </div>
                     <div className="flex-1 flex flex-col min-w-0">
                         <div className="grid grid-cols-3 gap-0.5 flex-1">
@@ -59,9 +59,9 @@ export const RiskMatrixCard: React.FC<RiskMatrixCardProps> = ({ title, risks: ra
                         </div>
                         {/* X-axis labels */}
                         <div className="flex justify-between mt-0.5 px-1 shrink-0">
-                            <span className="font-data text-base uppercase" style={{ color: 'rgba(255,255,255,0.90)' }}>Low</span>
-                            <span className="font-data text-base uppercase" style={{ color: 'rgba(255,255,255,0.90)' }}>Med</span>
-                            <span className="font-data text-base uppercase" style={{ color: 'rgba(255,255,255,0.90)' }}>High</span>
+                            <span className="font-data text-base uppercase" style={{ color: getColor(90) }}>Low</span>
+                            <span className="font-data text-base uppercase" style={{ color: getColor(90) }}>Med</span>
+                            <span className="font-data text-base uppercase" style={{ color: getColor(90) }}>High</span>
                         </div>
                         <div className="text-center shrink-0">
                             <span className="font-data text-base uppercase tracking-wider" style={{ color: `${getColor(70)}` }}>Impact →</span>

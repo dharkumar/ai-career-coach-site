@@ -19,6 +19,8 @@ import {
   Wrench,
 } from 'lucide-react';
 
+const getColor = (opacity: number) => `color-mix(in srgb, var(--theme-chart-line) ${opacity}%, transparent)`;
+
 interface ToolCallIndicatorProps {
   toolName: string;
   parameters: Record<string, unknown>;
@@ -70,30 +72,30 @@ export function ToolCallIndicator({
     <div
       className="mb-2 rounded-2xl backdrop-blur-sm border overflow-hidden transition-all duration-300 relative group"
       style={{
-        background: 'rgba(255,255,255,0.05)',
-        borderColor: 'rgba(255,255,255,0.10)',
+        background: getColor(5),
+        borderColor: getColor(10),
       }}
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full flex items-center justify-between px-3 sm:px-4 py-3 transition-colors"
-        style={{ color: 'rgba(255,255,255,0.7)' }}
+        style={{ color: getColor(70) }}
       >
         <div className="flex items-center gap-2 min-w-0 pr-2">
           <DisplayIcon className="w-4 h-4 text-emerald-400 shrink-0" />
           <span
             className="text-xs font-mono font-medium truncate"
-            style={{ color: 'rgba(255,255,255,0.5)' }}
+            style={{ color: getColor(50) }}
           >
             Called{' '}
-            <span style={{ color: 'rgba(255,255,255,0.85)' }}>{config.label}</span>
+            <span style={{ color: getColor(85) }}>{config.label}</span>
           </span>
         </div>
         <div className="flex items-center gap-2">
           <div
             onClick={handleCopy}
             className="p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 active:scale-95 cursor-pointer"
-            style={{ color: 'rgba(255,255,255,0.5)' }}
+            style={{ color: getColor(50) }}
             title="Copy to clipboard"
           >
             {copied ? (
@@ -105,12 +107,12 @@ export function ToolCallIndicator({
           {isExpanded ? (
             <ChevronUp
               className="w-4 h-4 transition-transform duration-300"
-              style={{ color: 'rgba(255,255,255,0.4)' }}
+              style={{ color: getColor(40) }}
             />
           ) : (
             <ChevronDown
               className="w-4 h-4 transition-transform duration-300"
-              style={{ color: 'rgba(255,255,255,0.4)' }}
+              style={{ color: getColor(40) }}
             />
           )}
         </div>
@@ -119,34 +121,34 @@ export function ToolCallIndicator({
       {isExpanded && (
         <div
           className="px-3 sm:px-4 pb-4 pt-0 space-y-3 mt-1"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+          style={{ borderTop: `1px solid ${getColor(5)}` }}
         >
           {Object.keys(parameters).length > 0 && (
             <div className="pt-2">
               <span
                 className="text-xs uppercase font-bold tracking-wider mb-1.5 block"
-                style={{ color: 'rgba(255,255,255,0.30)' }}
+                style={{ color: getColor(30) }}
               >
                 Parameters
               </span>
               <ul
                 className="space-y-1.5 p-2.5 rounded-lg"
                 style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.05)',
+                  background: getColor(5),
+                  border: `1px solid ${getColor(5)}`,
                 }}
               >
                 {Object.entries(parameters).map(([key, value]) => (
                   <li key={key} className="text-[11px] font-mono flex items-start">
                     <span
                       className="mr-2 w-24 shrink-0"
-                      style={{ color: 'rgba(255,255,255,0.40)' }}
+                      style={{ color: getColor(40) }}
                     >
                       {key}:
                     </span>
                     <span
                       className="break-words flex-1"
-                      style={{ color: 'rgba(255,255,255,0.75)' }}
+                      style={{ color: getColor(75) }}
                     >
                       {typeof value === 'string' ? `"${value}"` : JSON.stringify(value)}
                     </span>
@@ -158,7 +160,7 @@ export function ToolCallIndicator({
 
           <div
             className="flex justify-between items-center text-xs font-mono mt-2"
-            style={{ color: 'rgba(255,255,255,0.30)' }}
+            style={{ color: getColor(30) }}
           >
             <span>Status: <span className="text-emerald-400">Success</span></span>
           </div>

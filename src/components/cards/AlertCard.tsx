@@ -68,7 +68,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({ title, alerts = [] }) => {
                                     <div className="font-data text-base md:text-base font-bold uppercase tracking-wider leading-tight" style={{ color: sev.dot }}>
                                         {a.title}
                                     </div>
-                                    <div className="font-voice text-base md:text-base leading-tight mt-0.5 line-clamp-2" style={{ color: 'var(--theme-card-data)' }}>
+                                    <div className="font-voice text-base md:text-base leading-tight mt-0.5 line-clamp-2" style={{ color: getColor(92) }}>
                                         {a.detail}
                                     </div>
                                 </div>

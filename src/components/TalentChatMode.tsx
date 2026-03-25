@@ -37,8 +37,8 @@ function ChatInputBar({
     <div
       className="rounded-full overflow-hidden w-full flex items-center gap-2 px-4 py-2.5"
       style={{
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.08)",
+        background: "var(--theme-card-bg)",
+        border: "1px solid var(--theme-card-border)",
       }}
     >
       <input
@@ -100,8 +100,8 @@ function TemplateCard({ template }: { template: NonNullable<ChatMessage["templat
     <div className="mt-3 w-full">
       <Suspense fallback={
         <div className="rounded-2xl p-8 flex items-center justify-center" style={{
-          background: "rgba(255,255,255,0.04)",
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "var(--theme-card-bg)",
+          border: "1px solid var(--theme-card-border)",
         }}>
           <Loader2 className="animate-spin text-white/50" size={24} />
         </div>
@@ -145,8 +145,8 @@ function CandidateDataCard({ data }: { data: NonNullable<ChatMessage["candidateD
     <div
       className="rounded-2xl p-4 mt-3"
       style={{
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.1)",
+        background: "var(--theme-card-bg)",
+        border: "1px solid var(--theme-card-border)",
       }}
     >
       {/* Header with avatar and name */}

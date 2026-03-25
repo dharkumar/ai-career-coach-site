@@ -26,7 +26,7 @@ export const SmartImage: React.FC<SmartImageProps> = ({
     return (
       <div
         className="flex items-center justify-center h-full w-full"
-        style={{ backgroundColor: 'rgba(255,255,255,0.04)' }}
+        style={{ backgroundColor: 'var(--theme-card-bg)' }}
       >
         <span className="text-sm uppercase opacity-25">{alt || 'Image'}</span>
       </div>

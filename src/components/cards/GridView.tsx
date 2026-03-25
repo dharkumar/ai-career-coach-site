@@ -22,6 +22,23 @@ import {
     DecisionCard, DelegationCard,
     // Cross-Domain Intelligence (4)
     RelationshipCard, CountryCard, DataClusterCard, CalendarCard,
+    // Full-Page Templates (32)
+    // Navigation & Landing
+    EmptyScreen, WelcomeLanding, Dashboard,
+    // Interactive Forms & Options
+    GlassmorphicOptions, MultiSelectOptions, RegistrationForm, TextInput,
+    // Loading States
+    LoadingGeneral, LoadingLinkedIn,
+    // Job Discovery & Applications
+    CardStackTemplate, CardStackJobPreviewSheet, JobSearchSheet, JobDetailSheet,
+    EligibilitySheet, CloseGapSheet, JobApplicationsSheet, PastApplicationsSheet,
+    // Profile & Metrics
+    ProfileSheet, SkillCoverageSheet, MarketRelevanceSheet, CareerGrowthSheet,
+    SkillsDetail, MarketRelevanceDetail, CareerGrowthDetail,
+    // Learning & Development
+    MyLearningTemplate, LearningPathTemplate, TargetRoleTemplate, SkillTestFlow,
+    // Employer Features
+    HiringPage, JobPostingTemplate, JobCandidateView, EmployerDashboard,
 } from '@/components/cards';
 
 /* ═══════════════════════════════════════════════════════════
@@ -42,7 +59,7 @@ interface GridViewProps {
     onLogoClick?: () => void;
 }
 
-/* ═══ Card Renderer — 30 Card Types ═══ */
+/* ═══ Card Renderer — 62 Types (30 Cards + 32 Templates) ═══ */
 
 const CARD_MAP: Record<string, React.FC<any>> = {
     // Core Data (9)
@@ -84,7 +101,50 @@ const CARD_MAP: Record<string, React.FC<any>> = {
     'country-card': CountryCard,
     'data-cluster': DataClusterCard,
     'calendar': CalendarCard,
+
+    // Full-Page Templates (32)
+    // Navigation & Landing
+    'empty-screen': EmptyScreen,
+    'welcome-landing': WelcomeLanding,
+    'dashboard': Dashboard,
+    // Interactive Forms & Options
+    'glassmorphic-options': GlassmorphicOptions,
+    'multi-select-options': MultiSelectOptions,
+    'registration-form': RegistrationForm,
+    'text-input': TextInput,
+    // Loading States
+    'loading-general': LoadingGeneral,
+    'loading-linkedin': LoadingLinkedIn,
+    // Job Discovery & Applications
+    'card-stack-template': CardStackTemplate,
+    'card-stack-job-preview-sheet': CardStackJobPreviewSheet,
+    'job-search-sheet': JobSearchSheet,
+    'job-detail-sheet': JobDetailSheet,
+    'eligibility-sheet': EligibilitySheet,
+    'close-gap-sheet': CloseGapSheet,
+    'job-applications-sheet': JobApplicationsSheet,
+    'past-applications-sheet': PastApplicationsSheet,
+    // Profile & Metrics
+    'profile-sheet': ProfileSheet,
+    'skill-coverage-sheet': SkillCoverageSheet,
+    'market-relevance-sheet': MarketRelevanceSheet,
+    'career-growth-sheet': CareerGrowthSheet,
+    'skills-detail': SkillsDetail,
+    'market-relevance-detail': MarketRelevanceDetail,
+    'career-growth-detail': CareerGrowthDetail,
+    // Learning & Development
+    'my-learning-template': MyLearningTemplate,
+    'learning-path-template': LearningPathTemplate,
+    'target-role-template': TargetRoleTemplate,
+    'skill-test-flow': SkillTestFlow,
+    // Employer Features
+    'hiring-page': HiringPage,
+    'job-posting-template': JobPostingTemplate,
+    'job-candidate-view': JobCandidateView,
+    'employer-dashboard': EmployerDashboard,
+
     // Aliases — common hallucinated type names
+    'card-stack': CardStackTemplate,  // templateRegistry uses 'CardStack'
     'profile-roster': OrgRoster,
     'area-chart': LineChart,
     'progress': BarChart,
@@ -111,6 +171,25 @@ const CARD_SIZE: Record<string, number> = {
     'decision-card': 2, 'delegation-card': 2,
     // Cross-Domain Intelligence
     'relationship-card': 2, 'country-card': 2,
+
+    // Full-Page Templates (32) — all tier 3 (full-page/expansive)
+    // Navigation & Landing
+    'empty-screen': 3, 'welcome-landing': 3, 'dashboard': 3,
+    // Interactive Forms & Options
+    'glassmorphic-options': 3, 'multi-select-options': 3, 'registration-form': 3, 'text-input': 3,
+    // Loading States
+    'loading-general': 3, 'loading-linkedin': 3,
+    // Job Discovery & Applications
+    'card-stack-template': 3, 'card-stack-job-preview-sheet': 3,
+    'job-search-sheet': 3, 'job-detail-sheet': 3, 'eligibility-sheet': 3,
+    'close-gap-sheet': 3, 'job-applications-sheet': 3, 'past-applications-sheet': 3,
+    // Profile & Metrics
+    'profile-sheet': 3, 'skill-coverage-sheet': 3, 'market-relevance-sheet': 3,
+    'career-growth-sheet': 3, 'skills-detail': 3, 'market-relevance-detail': 3, 'career-growth-detail': 3,
+    // Learning & Development
+    'my-learning-template': 3, 'learning-path-template': 3, 'target-role-template': 3, 'skill-test-flow': 3,
+    // Employer Features
+    'hiring-page': 3, 'job-posting-template': 3, 'job-candidate-view': 3, 'employer-dashboard': 3,
 };
 
 function getRowWeight(rowCards: CardDef[]): number {

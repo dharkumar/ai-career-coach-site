@@ -114,6 +114,47 @@ export const DSL_SCHEMA: Record<string, { pipeCount: number; fields: string[] }>
     'crow':              { pipeCount: -1, fields: ['val1','val2','...'] },
     'heatmap':           { pipeCount: 2, fields: ['title','cols (semicolon-delimited)'] },
     'hrow':              { pipeCount: -1, fields: ['rowLabel','val1','val2','...'] },
+
+    // Full-Page Templates (32)
+    // Navigation & Landing
+    'empty-screen':      { pipeCount: 0, fields: [] },
+    'welcome-landing':   { pipeCount: 0, fields: [] },
+    'dashboard':         { pipeCount: 0, fields: [] },
+    // Interactive Forms & Options
+    'glassmorphic-options': { pipeCount: 0, fields: [] },
+    'multi-select-options': { pipeCount: 0, fields: [] },
+    'registration-form': { pipeCount: 0, fields: [] },
+    'text-input':        { pipeCount: 2, fields: ['placeholder','label'] },
+    // Loading States
+    'loading-general':   { pipeCount: 1, fields: ['message'] },
+    'loading-linkedin':  { pipeCount: 0, fields: [] },
+    // Job Discovery & Applications
+    'card-stack-template': { pipeCount: 0, fields: [] },
+    'card-stack-job-preview-sheet': { pipeCount: 5, fields: ['jobId','title','company','location','matchScore'] },
+    'job-search-sheet':  { pipeCount: 0, fields: [] },
+    'job-detail-sheet':  { pipeCount: 7, fields: ['jobId','title','company','location','salaryRange','matchScore','fitCategory'] },
+    'eligibility-sheet': { pipeCount: 5, fields: ['jobId','title','company','matchScore','fitCategory'] },
+    'close-gap-sheet':   { pipeCount: 3, fields: ['jobId','title','company'] },
+    'job-applications-sheet': { pipeCount: 0, fields: [] },
+    'past-applications-sheet': { pipeCount: 0, fields: [] },
+    // Profile & Metrics
+    'profile-sheet':     { pipeCount: 1, fields: ['name'] },
+    'skill-coverage-sheet': { pipeCount: 0, fields: [] },
+    'market-relevance-sheet': { pipeCount: 0, fields: [] },
+    'career-growth-sheet': { pipeCount: 0, fields: [] },
+    'skills-detail':     { pipeCount: 0, fields: [] },
+    'market-relevance-detail': { pipeCount: 0, fields: [] },
+    'career-growth-detail': { pipeCount: 0, fields: [] },
+    // Learning & Development
+    'my-learning-template': { pipeCount: 0, fields: [] },
+    'learning-path-template': { pipeCount: 3, fields: ['candidateId','jobTitle','jobCompany'] },
+    'target-role-template': { pipeCount: 0, fields: [] },
+    'skill-test-flow':   { pipeCount: 0, fields: [] },
+    // Employer Features
+    'hiring-page':       { pipeCount: 0, fields: [] },
+    'job-posting-template': { pipeCount: 0, fields: [] },
+    'job-candidate-view': { pipeCount: 3, fields: ['candidateId','candidateName','jobId'] },
+    'employer-dashboard': { pipeCount: 0, fields: [] },
 };
 
 // ── Container → item prefix map ───────────────────────────────────────────────
@@ -321,6 +362,77 @@ function parseFlatCard(type: string, fields: string[], span?: 'full'): CardDef |
             const [imageUrl, caption, subtitle] = fields;
             return Object.assign(card, { imageUrl: n(imageUrl), caption: n(caption), subtitle: n(subtitle) });
         }
+
+        // Full-Page Templates with parameters
+        case 'text-input': {
+            const [placeholder, label] = fields;
+            return Object.assign(card, { placeholder: n(placeholder), label: n(label) });
+        }
+        case 'loading-general': {
+            const [message] = fields;
+            return Object.assign(card, { message: n(message) });
+        }
+        case 'card-stack-job-preview-sheet': {
+            const [jobId, title, company, location, matchScoreStr] = fields;
+            const result: CardDef = Object.assign(card, { jobId: n(jobId), title: n(title), company: n(company), location: n(location) });
+            if (n(matchScoreStr)) result.matchScore = f(matchScoreStr);
+            return result;
+        }
+        case 'job-detail-sheet': {
+            const [jobId, title, company, location, salaryRange, matchScoreStr, fitCategory] = fields;
+            const result: CardDef = Object.assign(card, { jobId: n(jobId), title: n(title), company: n(company), location: n(location), salaryRange: n(salaryRange), fitCategory: n(fitCategory) });
+            if (n(matchScoreStr)) result.matchScore = f(matchScoreStr);
+            return result;
+        }
+        case 'eligibility-sheet': {
+            const [jobId, title, company, matchScoreStr, fitCategory] = fields;
+            const result: CardDef = Object.assign(card, { jobId: n(jobId), title: n(title), company: n(company), fitCategory: n(fitCategory) });
+            if (n(matchScoreStr)) result.matchScore = f(matchScoreStr);
+            return result;
+        }
+        case 'close-gap-sheet': {
+            const [jobId, title, company] = fields;
+            return Object.assign(card, { jobId: n(jobId), title: n(title), company: n(company) });
+        }
+        case 'profile-sheet': {
+            const [name] = fields;
+            return Object.assign(card, { name: n(name) });
+        }
+        case 'learning-path-template': {
+            const [candidateId, jobTitle, jobCompany] = fields;
+            return Object.assign(card, { candidateId: n(candidateId), jobTitle: n(jobTitle), jobCompany: n(jobCompany) });
+        }
+        case 'job-candidate-view': {
+            const [candidateId, candidateName, jobId] = fields;
+            return Object.assign(card, { candidateId: n(candidateId), candidateName: n(candidateName), jobId: n(jobId) });
+        }
+
+        // Templates with no parameters (pipeCount: 0)
+        case 'empty-screen':
+        case 'welcome-landing':
+        case 'dashboard':
+        case 'glassmorphic-options':
+        case 'multi-select-options':
+        case 'registration-form':
+        case 'loading-linkedin':
+        case 'card-stack-template':
+        case 'job-search-sheet':
+        case 'job-applications-sheet':
+        case 'past-applications-sheet':
+        case 'skill-coverage-sheet':
+        case 'market-relevance-sheet':
+        case 'career-growth-sheet':
+        case 'skills-detail':
+        case 'market-relevance-detail':
+        case 'career-growth-detail':
+        case 'my-learning-template':
+        case 'target-role-template':
+        case 'skill-test-flow':
+        case 'hiring-page':
+        case 'job-posting-template':
+        case 'employer-dashboard':
+            return card;  // No additional fields needed
+
         default:
             return null;
     }

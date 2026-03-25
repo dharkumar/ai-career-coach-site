@@ -69,7 +69,7 @@ export function TextInput({ placeholder = "Type your answer" }: TextInputProps) 
               background: "rgba(24,24,27,0.72)",
               backdropFilter: "blur(16px)",
               WebkitBackdropFilter: "blur(16px)",
-              border: "1px solid rgba(255,255,255,0.10)",
+              border: "1px solid var(--theme-card-border)",
             }}
           >
             <input

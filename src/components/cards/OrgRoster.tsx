@@ -24,18 +24,15 @@ export const OrgRoster: React.FC<OrgRosterProps> = ({ title, members, profiles }
                     const firstName = m.name.split(' ')[0];
                     const shortRole = m.role.length > 22 ? m.role.slice(0, 20) + '…' : m.role;
                     return (
-                        <div key={i} className="flex flex-col items-center text-center gap-1.5 min-w-0 p-3 rounded-xl" style={{ backgroundColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                            {/* First name as badge */}
-                            <span className="font-data text-base font-bold px-3 py-1 rounded-full whitespace-nowrap" style={{ backgroundColor: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.95)' }}>
+                        <div key={i} className="flex flex-col items-center text-center gap-1.5 min-w-0 p-3 rounded-xl" style={{ backgroundColor: getColor(8), border: `1px solid ${getColor(6)}` }}>
+                            <span className="font-data text-base font-bold px-3 py-1 rounded-full whitespace-nowrap" style={{ backgroundColor: getColor(12), color: getColor(95) }}>
                                 {firstName}
                             </span>
-                            {/* Role */}
-                            <div className="font-data text-base leading-tight truncate w-full" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                            <div className="font-data text-base leading-tight truncate w-full" style={{ color: getColor(65) }}>
                                 {shortRole}
                             </div>
-                            {/* Badge (metric) */}
                             {m.badge && (
-                                <span className="font-data text-base whitespace-nowrap" style={{ color: 'rgba(255,255,255,0.50)' }}>
+                                <span className="font-data text-base whitespace-nowrap" style={{ color: getColor(50) }}>
                                     {m.badge}
                                 </span>
                             )}

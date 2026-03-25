@@ -173,21 +173,21 @@ function SceneSkeleton({ layout }: { layout: string }) {
                   <div className="p-4 space-y-3">
                     <div
                       className="h-3 rounded-full w-1/3"
-                      style={{ background: 'rgba(255,255,255,0.12)', animationDelay: delay }}
+                      style={{ background: 'var(--theme-card-border)', animationDelay: delay }}
                     />
                     <div
                       className="h-2 rounded-full w-2/3"
-                      style={{ background: 'rgba(255,255,255,0.08)', animationDelay: `calc(${delay} + 80ms)` }}
+                      style={{ background: 'var(--theme-card-bg)', animationDelay: `calc(${delay} + 80ms)` }}
                     />
                     {rowIdx > 0 && (
                       <>
                         <div
                           className="h-2 rounded-full w-1/2"
-                          style={{ background: 'rgba(255,255,255,0.06)', animationDelay: `calc(${delay} + 160ms)` }}
+                          style={{ background: 'var(--theme-card-bg)', animationDelay: `calc(${delay} + 160ms)` }}
                         />
                         <div
                           className="h-8 rounded-lg w-full mt-2"
-                          style={{ background: 'rgba(255,255,255,0.05)', animationDelay: `calc(${delay} + 240ms)` }}
+                          style={{ background: 'var(--theme-card-bg)', animationDelay: `calc(${delay} + 240ms)` }}
                         />
                       </>
                     )}

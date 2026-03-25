@@ -4,17 +4,17 @@
  */
 
 import React from 'react';
-import { CalendarDays, Clock, CheckCircle2, AlertCircle, Circle } from 'lucide-react';
+import { CalendarDays, Clock } from 'lucide-react';
 
 const C = 'var(--theme-chart-line)';
 const getColor = (opacity: number) => `color-mix(in srgb, var(--theme-chart-line) ${opacity}%, transparent)`;
 
-const STATUS_STYLE: Record<string, { color: string; label: string; Icon: React.FC<any> }> = {
-    confirmed:  { color: '#22c55e', label: 'Confirmed',  Icon: CheckCircle2 },
-    tentative:  { color: '#f59e0b', label: 'Tentative',  Icon: AlertCircle  },
-    cancelled:  { color: '#ef4444', label: 'Cancelled',  Icon: AlertCircle  },
-    pending:    { color: '#f59e0b', label: 'Pending',    Icon: Circle       },
-    default:    { color: '#ffffff60', label: '',          Icon: Circle       },
+const STATUS_STYLE: Record<string, { color: string; label: string }> = {
+    confirmed:  { color: '#22c55e', label: 'Confirmed' },
+    tentative:  { color: '#f59e0b', label: 'Tentative' },
+    cancelled:  { color: '#ef4444', label: 'Cancelled' },
+    pending:    { color: '#f59e0b', label: 'Pending'   },
+    default:    { color: '#ffffff60', label: ''         },
 };
 
 interface CalendarEvent {

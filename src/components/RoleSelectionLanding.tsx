@@ -53,11 +53,11 @@ function RoleCard({
       className="relative flex-1 min-w-0 text-left rounded-2xl p-6 sm:p-8 transition-transform duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
       style={{
         background: hovered
-          ? "rgba(255,255,255,0.07)"
-          : "rgba(255,255,255,0.04)",
+          ? "var(--theme-card-bg)"
+          : "var(--theme-scene-badge-bg)",
         border: hovered
           ? `1px solid ${accentColor}55`
-          : "1px solid rgba(255,255,255,0.08)",
+          : "1px solid var(--theme-card-border)",
         backdropFilter: "blur(20px)",
         boxShadow: hovered
           ? `0 8px 40px ${glowColor}, inset 0 1px 1px rgba(255,255,255,0.06)`

@@ -40,11 +40,11 @@ function JobCard({
       className="w-full text-left rounded-xl p-5 transition-all duration-150"
       style={{
         background: selected
-          ? "rgba(255,255,255,0.15)"
-          : "rgba(255,255,255,0.05)",
+          ? "var(--theme-card-border)"
+          : "var(--theme-card-bg)",
         border: selected
-          ? "1px solid rgba(255,255,255,0.1)"
-          : "1px solid rgba(255,255,255,0.05)",
+          ? "1px solid var(--theme-card-border)"
+          : `1px solid var(--theme-card-bg)`,
       }}
     >
       <div className="flex flex-col gap-1">

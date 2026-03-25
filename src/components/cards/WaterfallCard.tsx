@@ -55,11 +55,10 @@ export const WaterfallCard: React.FC<WaterfallCardProps> = ({ title, segments = 
                     return (
                         <div key={i} className="flex items-center gap-2">
                             {/* Label */}
-                            <span className="font-data text-base w-20 sm:w-24 text-left truncate font-bold uppercase" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                            <span className="font-data text-base w-20 sm:w-24 text-left truncate font-bold uppercase" style={{ color: getColor(85) }}>
                                 {item.label}
                             </span>
-                            {/* Bar */}
-                            <div className="flex-1 h-3.5 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.06)' }}>
+                            <div className="flex-1 h-3.5 rounded-full overflow-hidden" style={{ backgroundColor: getColor(6) }}>
                                 <div
                                     className="h-full rounded-full transition-all duration-700"
                                     style={{ width: `${Math.max(pct, 3)}%`, backgroundColor: barColor, opacity: 0.85 }}
