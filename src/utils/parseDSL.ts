@@ -182,18 +182,48 @@ const CONTAINER_ITEM_PREFIXES: Record<string, string> = {
     'table':             'trow',
     'comparison-table':  'crow',
     'heatmap':           'hrow',
+    // Templates as containers
+    'glassmorphic-options': 'option',
+    'multi-select-options': 'option',
+    'glassmorphicoptions': 'option',  // alias
+    'multiselectoptions': 'option',   // alias
 };
 
 const CONTAINER_TYPES   = new Set(Object.keys(CONTAINER_ITEM_PREFIXES));
-const ALL_ITEM_PREFIXES = new Set(Object.values(CONTAINER_ITEM_PREFIXES));
+const ALL_ITEM_PREFIXES = new Set([...Object.values(CONTAINER_ITEM_PREFIXES), 'bubbles']);  // Add 'bubbles' alias
 const FLAT_TYPES        = new Set([
     'stat', 'callout', 'person-card', 'relationship-card',
     'incident-card', 'info-card', 'country-card', 'image-card',
+    // Full-Page Templates (30 flat templates - glassmorphic/multiselect are now containers)
+    'empty-screen', 'welcome-landing', 'dashboard',
+    'registration-form', 'text-input',
+    'loading-general', 'loading-linkedin',
+    'card-stack-template', 'card-stack-job-preview-sheet',
+    'job-search-sheet', 'job-detail-sheet', 'eligibility-sheet',
+    'close-gap-sheet', 'job-applications-sheet', 'past-applications-sheet',
+    'profile-sheet', 'skill-coverage-sheet', 'market-relevance-sheet',
+    'career-growth-sheet', 'skills-detail', 'market-relevance-detail', 'career-growth-detail',
+    'my-learning-template', 'learning-path-template', 'target-role-template', 'skill-test-flow',
+    'hiring-page', 'job-posting-template', 'job-candidate-view', 'employer-dashboard',
+    // Template aliases (no hyphens - AI often generates these)
+    'emptyscreen', 'welcomelanding',
+    'registrationform', 'textinput',
+    'loadinggeneral', 'loadinglinkedin',
+    'cardstack', 'cardstacktemplate', 'cardstackjobpreviewsheet',
+    'jobsearchsheet', 'jobdetailsheet', 'eligibilitysheet',
+    'closegapsheet', 'jobapplicationssheet', 'pastapplicationssheet',
+    'profilesheet', 'skillcoveragesheet', 'marketrelevancesheet',
+    'careergrowthsheet', 'skillsdetail', 'marketrelevancedetail', 'careergrowthdetail',
+    'mylearningtemplate', 'learningpathtemplate', 'targetroletemplate', 'skilltestflow',
+    'hiringpage', 'jobpostingtemplate', 'jobcandidateview', 'employerdashboard',
 ]);
 
 // ── Item parsers ──────────────────────────────────────────────────────────────
 function parseItem(prefix: string, fields: string[]): Record<string, any> | null {
-    switch (prefix) {
+    // Normalize aliases
+    const normalizedPrefix = prefix === 'bubbles' ? 'option' : prefix;
+    
+    switch (normalizedPrefix) {
         case 'kpi': {
             const [label, value, change, trend, status] = fields;
             return { label: n(label), value: n(value), change: n(change), trend: n(trend), status: n(status) };
@@ -324,10 +354,47 @@ function parseItem(prefix: string, fields: string[]): Record<string, any> | null
 
 // ── Flat card parser ──────────────────────────────────────────────────────────
 function parseFlatCard(type: string, fields: string[], span?: 'full'): CardDef | null {
-    const card: CardDef = { type };
+    // Normalize no-hyphen template aliases to canonical form
+    const TYPE_ALIASES: Record<string, string> = {
+        'emptyscreen': 'empty-screen',
+        'welcomelanding': 'welcome-landing',
+        'glassmorphicoptions': 'glassmorphic-options',
+        'multiselectoptions': 'multi-select-options',
+        'registrationform': 'registration-form',
+        'textinput': 'text-input',
+        'loadinggeneral': 'loading-general',
+        'loadinglinkedin': 'loading-linkedin',
+        'cardstack': 'card-stack-template',
+        'cardstacktemplate': 'card-stack-template',
+        'cardstackjobpreviewsheet': 'card-stack-job-preview-sheet',
+        'jobsearchsheet': 'job-search-sheet',
+        'jobdetailsheet': 'job-detail-sheet',
+        'eligibilitysheet': 'eligibility-sheet',
+        'closegapsheet': 'close-gap-sheet',
+        'jobapplicationssheet': 'job-applications-sheet',
+        'pastapplicationssheet': 'past-applications-sheet',
+        'profilesheet': 'profile-sheet',
+        'skillcoveragesheet': 'skill-coverage-sheet',
+        'marketrelevancesheet': 'market-relevance-sheet',
+        'careergrowthsheet': 'career-growth-sheet',
+        'skillsdetail': 'skills-detail',
+        'marketrelevancedetail': 'market-relevance-detail',
+        'careergrowthdetail': 'career-growth-detail',
+        'mylearningtemplate': 'my-learning-template',
+        'learningpathtemplate': 'learning-path-template',
+        'targetroletemplate': 'target-role-template',
+        'skilltestflow': 'skill-test-flow',
+        'hiringpage': 'hiring-page',
+        'jobpostingtemplate': 'job-posting-template',
+        'jobcandidateview': 'job-candidate-view',
+        'employerdashboard': 'employer-dashboard',
+    };
+
+    const normalizedType = TYPE_ALIASES[type] || type;
+    const card: CardDef = { type: normalizedType };
     if (span) card.span = span;
 
-    switch (type) {
+    switch (normalizedType) {
         case 'stat': {
             const [label, value, trend, status, subtitle, change] = fields;
             return Object.assign(card, { label: n(label), value: n(value), trend: n(trend), status: n(status), subtitle: n(subtitle), change: n(change) });
@@ -411,8 +478,6 @@ function parseFlatCard(type: string, fields: string[], span?: 'full'): CardDef |
         case 'empty-screen':
         case 'welcome-landing':
         case 'dashboard':
-        case 'glassmorphic-options':
-        case 'multi-select-options':
         case 'registration-form':
         case 'loading-linkedin':
         case 'card-stack-template':
@@ -563,6 +628,12 @@ function flushContainer(
             if (meta.owner)       card.owner       = meta.owner;
             card.options = items;
             break;
+        case 'glassmorphic-options':
+        case 'multi-select-options':
+        case 'glassmorphicoptions':
+        case 'multiselectoptions':
+            card.bubbles = items;
+            break;
         case 'calendar':
             card.events = items;
             break;
@@ -680,11 +751,14 @@ export function parseDSL(raw: string): ParsedDSL {
         const prefix = parts[0].toLowerCase().trim();
         const fields = parts.slice(1);
 
+        // Normalize item prefix aliases
+        const normalizedPrefix = prefix === 'bubbles' ? 'option' : prefix;
+
         // Item line for active container
         if (containerType
-            && ALL_ITEM_PREFIXES.has(prefix)
-            && CONTAINER_ITEM_PREFIXES[containerType] === prefix) {
-            const item = parseItem(prefix, fields);
+            && ALL_ITEM_PREFIXES.has(normalizedPrefix)
+            && CONTAINER_ITEM_PREFIXES[containerType] === normalizedPrefix) {
+            const item = parseItem(normalizedPrefix, fields);
             if (item) containerItems.push(item);
             continue;
         }
