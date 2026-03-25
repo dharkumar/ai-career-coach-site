@@ -1,5 +1,5 @@
-import { WelcomeLanding } from '@/components/voice/WelcomeLanding';
+import App from '@/components/App';
 
 export default function Home() {
-  return <WelcomeLanding />;
+  return <App />;
 }

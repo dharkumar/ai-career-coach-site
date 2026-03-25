@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, BriefcaseIcon, BuildingIcon } from "lucide-react";
-
-type Journey = "talent" | "employer";
+import { ArrowRight, BriefcaseIcon } from "lucide-react";
 
 interface RoleSelectionLandingProps {
-  onSelect: (journey: Journey) => void;
+  onSelect: () => void;
 }
 
 const SparkleIcon = () => (
@@ -205,8 +203,8 @@ export function RoleSelectionLanding({ onSelect }: RoleSelectionLandingProps) {
           Choose your role to get a personalized AI-powered experience
         </motion.p>
 
-        {/* Role cards */}
-        <div className="flex flex-col sm:flex-row gap-4 w-full max-w-2xl">
+        {/* Role card */}
+        <div className="flex justify-center w-full max-w-md">
           <RoleCard
             icon={<BriefcaseIcon size={22} />}
             subtitle="Talent"
@@ -215,19 +213,8 @@ export function RoleSelectionLanding({ onSelect }: RoleSelectionLandingProps) {
             tags={["Job Search", "Skill Matching", "Career Coaching"]}
             accentColor="#1ed25e"
             glowColor="rgba(30,210,94,0.12)"
-            onClick={() => onSelect("talent")}
+            onClick={onSelect}
             delay={0.38}
-          />
-          <RoleCard
-            icon={<BuildingIcon size={22} />}
-            subtitle="Employer"
-            title="I'm hiring talent"
-            description="Post jobs, review applicants, and build a skilled workforce with AI-powered hiring tools."
-            tags={["Job Posting", "Applicant Review", "Workforce Planning"]}
-            accentColor="#51a2ff"
-            glowColor="rgba(81,162,255,0.12)"
-            onClick={() => onSelect("employer")}
-            delay={0.46}
           />
         </div>
       </div>

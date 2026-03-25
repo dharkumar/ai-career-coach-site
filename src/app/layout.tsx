@@ -3,8 +3,11 @@ import './globals.css';
 import { VoiceSessionProvider } from '@/components/voice/VoiceSessionProvider';
 import { BackgroundLayer } from '@/components/voice/BackgroundLayer';
 import { SceneLayout } from '@/components/voice/SceneLayout';
-import { ControlBar } from '@/components/voice/ControlBar';
+import { BottomNav } from '@/components/BottomNav';
+import { TeleSpeechBubble } from '@/components/TeleSpeechBubble';
+import { DevToolbar } from '@/components/DevToolbar';
 import { ChatPanel } from '@/components/voice/ChatPanel';
+import { TeleSpeechProvider } from '@/contexts/TeleSpeechContext';
 
 const agentName = process.env.NEXT_PUBLIC_AGENT_NAME || 'AI Assistant';
 
@@ -21,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
         <link
           rel="preconnect"
           href="https://fonts.googleapis.com"
@@ -35,14 +39,29 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         <VoiceSessionProvider>
-          <BackgroundLayer />
-          <div id="scene-root" className="relative z-[2] lg:h-dvh">
-            <SceneLayout>{children}</SceneLayout>
-          </div>
-          <ControlBar />
-          <ChatPanel />
+          <TeleSpeechProvider>
+            <BackgroundLayer />
+            <TeleSpeechBubble />
+            <div id="scene-root" className="relative z-[2] h-dvh">
+              <SceneLayout>{children}</SceneLayout>
+            </div>
+            <div 
+              className="flex flex-col items-center gap-2"
+              style={{
+                position: 'fixed',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                bottom: 'calc(12px + env(safe-area-inset-bottom, 0px) + var(--vv-bottom-inset, 0px))',
+                zIndex: 100,
+              }}
+            >
+              <DevToolbar />
+              <BottomNav />
+            </div>
+            <ChatPanel />
+          </TeleSpeechProvider>
         </VoiceSessionProvider>
       </body>
     </html>

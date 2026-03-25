@@ -87,10 +87,3 @@ export { TargetRoleTemplate } from '../templates/TargetRoleTemplate';
 export { SkillTestFlow } from '../templates/SkillTestFlow';
 
 
-// Employer Features
-export { HiringPage } from '../templates/HiringPage';
-export { JobPostingTemplate } from '../templates/JobPostingTemplate';
-export { JobCandidateView } from '../templates/JobCandidateView';
-export { EmployerDashboard } from '../templates/EmployerDashboard';
-
-

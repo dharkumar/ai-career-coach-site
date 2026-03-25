@@ -37,8 +37,6 @@ import {
     SkillsDetail, MarketRelevanceDetail, CareerGrowthDetail,
     // Learning & Development
     MyLearningTemplate, LearningPathTemplate, TargetRoleTemplate, SkillTestFlow,
-    // Employer Features
-    HiringPage, JobPostingTemplate, JobCandidateView, EmployerDashboard,
 } from '@/components/cards';
 
 /* ═══════════════════════════════════════════════════════════
@@ -137,11 +135,6 @@ const CARD_MAP: Record<string, React.FC<any>> = {
     'learning-path-template': LearningPathTemplate,
     'target-role-template': TargetRoleTemplate,
     'skill-test-flow': SkillTestFlow,
-    // Employer Features
-    'hiring-page': HiringPage,
-    'job-posting-template': JobPostingTemplate,
-    'job-candidate-view': JobCandidateView,
-    'employer-dashboard': EmployerDashboard,
 
     // Aliases — common hallucinated type names
     'card-stack': CardStackTemplate,  // templateRegistry uses 'CardStack'
@@ -177,10 +170,6 @@ const CARD_MAP: Record<string, React.FC<any>> = {
     'learningpathtemplate': LearningPathTemplate,
     'targetroletemplate': TargetRoleTemplate,
     'skilltestflow': SkillTestFlow,
-    'hiringpage': HiringPage,
-    'jobpostingtemplate': JobPostingTemplate,
-    'jobcandidateview': JobCandidateView,
-    'employerdashboard': EmployerDashboard,
 };
 
 /* ═══ Card Size Tiers — flex-grow weights for row height distribution ═══ */
@@ -221,8 +210,6 @@ const CARD_SIZE: Record<string, number> = {
     'career-growth-sheet': 3, 'skills-detail': 3, 'market-relevance-detail': 3, 'career-growth-detail': 3,
     // Learning & Development
     'my-learning-template': 3, 'learning-path-template': 3, 'target-role-template': 3, 'skill-test-flow': 3,
-    // Employer Features
-    'hiring-page': 3, 'job-posting-template': 3, 'job-candidate-view': 3, 'employer-dashboard': 3,
 };
 
 function getRowWeight(rowCards: CardDef[]): number {

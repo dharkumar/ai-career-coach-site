@@ -136,21 +136,6 @@ export const TEMPLATE_REGISTRY: Record<string, React.LazyExoticComponent<AnyTemp
       default: m.CareerGrowthSheet as unknown as AnyTemplate,
     }))
   ),
-  JobPostingTemplate: React.lazy(() =>
-    import("@/components/templates/JobPostingTemplate").then((m) => ({
-      default: m.JobPostingTemplate as unknown as AnyTemplate,
-    }))
-  ),
-  JobCandidateView: React.lazy(() =>
-    import("@/components/templates/JobCandidateView").then((m) => ({
-      default: m.JobCandidateView as unknown as AnyTemplate,
-    }))
-  ),
-  HiringPage: React.lazy(() =>
-    import("@/components/templates/HiringPage").then((m) => ({
-      default: m.HiringPage as unknown as AnyTemplate,
-    }))
-  ),
   MyLearningTemplate: React.lazy(() =>
     import("@/components/templates/MyLearningTemplate").then((m) => ({
       default: m.MyLearningTemplate as unknown as AnyTemplate,
@@ -193,9 +178,6 @@ export const REQUIRED_PROPS: Record<string, string[]> = {
   CareerGrowthDetail: [],
   MarketRelevanceSheet: [],
   CareerGrowthSheet: [],
-  JobPostingTemplate: [],
-  JobCandidateView: [],
-  HiringPage: [],
   MyLearningTemplate: [],
   TargetRoleTemplate: [],
 };

@@ -150,11 +150,6 @@ export const DSL_SCHEMA: Record<string, { pipeCount: number; fields: string[] }>
     'learning-path-template': { pipeCount: 3, fields: ['candidateId','jobTitle','jobCompany'] },
     'target-role-template': { pipeCount: 0, fields: [] },
     'skill-test-flow':   { pipeCount: 0, fields: [] },
-    // Employer Features
-    'hiring-page':       { pipeCount: 0, fields: [] },
-    'job-posting-template': { pipeCount: 0, fields: [] },
-    'job-candidate-view': { pipeCount: 3, fields: ['candidateId','candidateName','jobId'] },
-    'employer-dashboard': { pipeCount: 0, fields: [] },
 };
 
 // ── Container → item prefix map ───────────────────────────────────────────────
@@ -204,7 +199,6 @@ const FLAT_TYPES        = new Set([
     'profile-sheet', 'skill-coverage-sheet', 'market-relevance-sheet',
     'career-growth-sheet', 'skills-detail', 'market-relevance-detail', 'career-growth-detail',
     'my-learning-template', 'learning-path-template', 'target-role-template', 'skill-test-flow',
-    'hiring-page', 'job-posting-template', 'job-candidate-view', 'employer-dashboard',
     // Template aliases (no hyphens - AI often generates these)
     'emptyscreen', 'welcomelanding',
     'registrationform', 'textinput',
@@ -215,7 +209,6 @@ const FLAT_TYPES        = new Set([
     'profilesheet', 'skillcoveragesheet', 'marketrelevancesheet',
     'careergrowthsheet', 'skillsdetail', 'marketrelevancedetail', 'careergrowthdetail',
     'mylearningtemplate', 'learningpathtemplate', 'targetroletemplate', 'skilltestflow',
-    'hiringpage', 'jobpostingtemplate', 'jobcandidateview', 'employerdashboard',
 ]);
 
 // ── Item parsers ──────────────────────────────────────────────────────────────
@@ -384,10 +377,6 @@ function parseFlatCard(type: string, fields: string[], span?: 'full'): CardDef |
         'learningpathtemplate': 'learning-path-template',
         'targetroletemplate': 'target-role-template',
         'skilltestflow': 'skill-test-flow',
-        'hiringpage': 'hiring-page',
-        'jobpostingtemplate': 'job-posting-template',
-        'jobcandidateview': 'job-candidate-view',
-        'employerdashboard': 'employer-dashboard',
     };
 
     const normalizedType = TYPE_ALIASES[type] || type;
@@ -469,10 +458,6 @@ function parseFlatCard(type: string, fields: string[], span?: 'full'): CardDef |
             const [candidateId, jobTitle, jobCompany] = fields;
             return Object.assign(card, { candidateId: n(candidateId), jobTitle: n(jobTitle), jobCompany: n(jobCompany) });
         }
-        case 'job-candidate-view': {
-            const [candidateId, candidateName, jobId] = fields;
-            return Object.assign(card, { candidateId: n(candidateId), candidateName: n(candidateName), jobId: n(jobId) });
-        }
 
         // Templates with no parameters (pipeCount: 0)
         case 'empty-screen':
@@ -493,9 +478,6 @@ function parseFlatCard(type: string, fields: string[], span?: 'full'): CardDef |
         case 'my-learning-template':
         case 'target-role-template':
         case 'skill-test-flow':
-        case 'hiring-page':
-        case 'job-posting-template':
-        case 'employer-dashboard':
             return card;  // No additional fields needed
 
         default:

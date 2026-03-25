@@ -2,9 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { BottomNav } from "./BottomNav";
 import { TeleSpeechBubble } from "./TeleSpeechBubble";
-import { DevToolbar } from "./DevToolbar";
 import { TalentChatMode } from "./TalentChatMode";
 import { DashboardBtn } from "@/components/ui/DashboardBtn";
 import { LearningBtn } from "@/components/ui/LearningBtn";
@@ -32,9 +30,9 @@ interface BaseLayoutProps {
  *    BG-LAYER takes over with the HeyGen live stream)
  *  - Green radial glow (always behind the avatar)
  *  - Top / bottom edge gradient fades (above template content z-40)
- *  - BottomNav (never unmounted so connection state persists across templates)
  *
  * Templates rendered via DynamicSectionLoader float as children above these layers.
+ * BottomNav is now in root layout.tsx for global persistence.
  */
 export function BaseLayout({ children, sections = [] }: BaseLayoutProps) {
   const { connectionState, connected } = useTeleState();
@@ -180,20 +178,6 @@ export function BaseLayout({ children, sections = [] }: BaseLayoutProps) {
           />
         )}
       </AnimatePresence>
-
-      {/* ── Dev toolbar + BottomNav — pinned at bottom, never unmounted ──── */}
-      <div
-        data-testid="base-layout-bottom-nav"
-        className="absolute left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center gap-2"
-        style={{
-          /* Hug the visual bottom: safe-area covers the home indicator; small margin + vv for browser chrome */
-          bottom:
-            "calc(12px + env(safe-area-inset-bottom, 0px) + var(--vv-bottom-inset, 0px))",
-        }}
-      >
-        <DevToolbar />
-        <BottomNav />
-      </div>
     </div>
   );
 }
