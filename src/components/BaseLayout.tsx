@@ -23,19 +23,12 @@ interface BaseLayoutProps {
 }
 
 /**
- * Persistent outer shell — rendered once in App.tsx and never re-mounted.
+ * Persistent outer shell for template rendering.
  *
- * Owns everything that must survive template and step transitions:
- *  - Static /avatar.jpg background (fades out when Tele connects; UIFramework
- *    BG-LAYER takes over with the HeyGen live stream)
- *  - Green radial glow (always behind the avatar)
- *  - Top / bottom edge gradient fades (above template content z-40)
- *
- * Templates rendered via DynamicSectionLoader float as children above these layers.
- * BottomNav is now in root layout.tsx for global persistence.
+ * Templates rendered via DynamicSectionLoader float as children.
+ * Background, BottomNav, and TeleSpeechBubble are now in root layout.tsx.
  */
 export function BaseLayout({ children, sections = [] }: BaseLayoutProps) {
-  const { connectionState, connected } = useTeleState();
   const [chatMode, setChatMode] = useState(false);
   useVisualViewportBottomInset();
 
@@ -117,40 +110,7 @@ export function BaseLayout({ children, sections = [] }: BaseLayoutProps) {
   };
 
   return (
-    <div data-testid="base-layout" className="relative w-screen h-[100svh] overflow-hidden bg-[var(--bg)]">
-
-      {/* ── Static avatar photo — shown when disconnected regardless of mode ─── */}
-      <motion.div
-        data-testid="base-layout-avatar-photo"
-        className="absolute inset-0 overflow-hidden"
-        animate={{ opacity: !connected ? 1 : 0 }}
-        transition={{
-          delay:0.25,
-          duration: 0.2,
-          ease: "easeInOut",
-        }}
-      >
-        <img
-          src="/Magic.png"
-          alt="trAIn — AI career concierge"
-          className="absolute right-[-67px] top-[80px] h-[90%] w-auto max-w-none pointer-events-none select-none"
-        />
-      </motion.div>
-
-      {/* ── Edge gradient fades (above template layer z-40; speech 60, nav 100) */}
-      <div
-        data-testid="base-layout-gradient-bottom"
-        className="absolute left-0 right-0 bottom-0 z-[10] pointer-events-none no-lightboard"
-        style={{ height: "28%" }}
-      />
-      <div
-        data-testid="base-layout-gradient-top"
-        className="absolute left-0 right-0 top-0 z-[10] pointer-events-none no-lightboard"
-        style={{ height: "24%" }}
-      />
-
-      {/* ── Persistent speech overlay — shows what Tele is saying for video mode ────────── */}
-      {!chatMode && <TeleSpeechBubble />}
+    <div data-testid="base-layout" className="relative w-screen h-[100svh] overflow-hidden">
 
       {/* ── Template content ──────────────────────────────────────────────── */}
       {!chatMode && (

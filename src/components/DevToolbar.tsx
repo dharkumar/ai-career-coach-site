@@ -5,12 +5,6 @@ import { Mic, MicOff, Volume2, VolumeX } from "lucide-react";
 
 const DEV_TOOLBAR_HOST = process.env.NEXT_PUBLIC_DEV_TOOLBAR_HOST as string | undefined;
 
-const IS_DEV =
-  typeof window !== "undefined" &&
-  (window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1" ||
-    (!!DEV_TOOLBAR_HOST && window.location.hostname === DEV_TOOLBAR_HOST));
-
 function getFramework(): Record<string, unknown> | null {
   return (window as unknown as Record<string, unknown>).UIFramework as Record<string, unknown> | null;
 }
@@ -18,7 +12,17 @@ function getFramework(): Record<string, unknown> | null {
 export function DevToolbar() {
   const [micMuted, setMicMuted] = useState(false);
   const [teleMuted, setTeleMuted] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const muteLoopRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Check if in dev mode after hydration to avoid mismatch
+  useEffect(() => {
+    const isDev =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      (!!DEV_TOOLBAR_HOST && window.location.hostname === DEV_TOOLBAR_HOST);
+    setIsClient(isDev);
+  }, []);
 
   const sweepAudioElements = useCallback((muted: boolean) => {
     document.querySelectorAll("audio, video").forEach((el) => {
@@ -59,7 +63,7 @@ export function DevToolbar() {
     };
   }, [teleMuted, sweepAudioElements]);
 
-  if (!IS_DEV) return null;
+  if (!isClient) return null;
 
   return (
     <div className="flex items-center gap-2">
