@@ -29,6 +29,7 @@ interface BaseLayoutProps {
  * Background, BottomNav, and TeleSpeechBubble are now in root layout.tsx.
  */
 export function BaseLayout({ children, sections = [] }: BaseLayoutProps) {
+  const { connected } = useTeleState();
   const [chatMode, setChatMode] = useState(false);
   useVisualViewportBottomInset();
 
